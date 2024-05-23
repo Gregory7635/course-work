@@ -6,10 +6,10 @@ double totalSales = 0.0;
 int totalticket = 0;
 
 void chooseTicket() {
-    std::cout << "Äîñòóïíûå áèëåòû:" << std::endl;
+    std::cout << "Ð”Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ðµ Ð±Ð¸Ð»ÐµÑ‚Ñ‹:" << std::endl;
     for (const auto& pair : ticketsMap) {
         if (soldTickets.find(pair.first) == soldTickets.end()) {
-            std::cout << "Áèëåò #" << pair.first << ": " << pair.second.movieName << " " << " " << "Âðåìÿ êèíîñåàíñà: " << pair.second.showTime << " Öåíà:" << pair.second.ticketPrice << " Ðóá" << std::endl;
+            std::cout << "Ð‘Ð¸Ð»ÐµÑ‚ #" << pair.first << ": " << pair.second.movieName << " " << " " << "Ð’Ñ€ÐµÐ¼Ñ ÐºÐ¸Ð½Ð¾ÑÐµÐ°Ð½ÑÐ°: " << pair.second.showTime << " Ð¦ÐµÐ½Ð°:" << pair.second.ticketPrice << " Ð ÑƒÐ±" << std::endl;
         }
     }
 }
@@ -18,32 +18,32 @@ void orderTicket(int ticketNumber, bool isChild) {
     if (soldTickets.find(ticketNumber) == soldTickets.end()) {
         Ticket selectedTicket = ticketsMap[ticketNumber];
         std::ofstream outputFile("purchased_tickets.txt", std::ios::app);
-        outputFile << "Ôèëüì: " << selectedTicket.movieName << std::endl;
-        outputFile << "Âðåìÿ êèíîñåàíñà: " << selectedTicket.showTime << std::endl;
-        outputFile << "Öåíà áèëåòà: " << (isChild ? selectedTicket.ticketPrice / 2 : selectedTicket.ticketPrice) <<" Ðóá" << std::endl;
+        outputFile << "Ð¤Ð¸Ð»ÑŒÐ¼: " << selectedTicket.movieName << std::endl;
+        outputFile << "Ð’Ñ€ÐµÐ¼Ñ ÐºÐ¸Ð½Ð¾ÑÐµÐ°Ð½ÑÐ°: " << selectedTicket.showTime << std::endl;
+        outputFile << "Ð¦ÐµÐ½Ð° Ð±Ð¸Ð»ÐµÑ‚Ð°: " << (isChild ? selectedTicket.ticketPrice / 2 : selectedTicket.ticketPrice) <<" â€“ÑƒÐ±" << std::endl;
         if (isChild == true) {
-            outputFile << "Äåòñêèé áèëåò" << std::endl;
+            outputFile << "Ð”ÐµÑ‚ÑÐºÐ¸Ð¹ Ð±Ð¸Ð»ÐµÑ‚" << std::endl;
         }
         else {
-            outputFile << "Âçðîñëûé áèëåò" << std::endl;
+            outputFile << "Ð’Ð·Ñ€Ð¾ÑÐ»Ñ‹Ð¹ Ð±Ð¸Ð»ÐµÑ‚" << std::endl;
         }
-        outputFile << "Ðÿä " << selectedTicket.row << ", Ìåñòî " << selectedTicket.seat << std::endl;
+        outputFile << "Ð ÑÐ´ " << selectedTicket.row << "ÐœÐµÑÑ‚Ð¾ " << selectedTicket.seat << std::endl;
         outputFile << "-------------------------" << std::endl;
         double ticketPrice = isChild ? selectedTicket.ticketPrice / 2 : selectedTicket.ticketPrice;
         totalSales += ticketPrice;
         totalticket += 1;
         soldTickets.insert(ticketNumber);
-        std::cout << "Áèëåò óñïåøíî êóïëåí!" << std::endl;
+        std::cout << "Ð‘Ð¸Ð»ÐµÑ‚ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ ÐºÑƒÐ¿Ð»ÐµÐ½!" << std::endl;
     }
     else {
-        std::cout << "Îøèáêà: Ýòîò áèëåò óæå ïðîäàí." << std::endl;
+        std::cout << "ÐžÑˆÐ¸Ð±ÐºÐ°, Ð±Ð¸Ð»ÐµÑ‚ ÑƒÐ¶Ðµ ÐºÑƒÐ¿Ð»ÐµÐ½" << std::endl;
     }
 }
 
 void numSoldTickets() {
-    std::cout << "Âñåãî ïðîäàíî áèëåòîâ: " << totalticket << std::endl;
+    std::cout << "Ð’ÑÐµÐ³Ð¾ Ð¿Ñ€Ð¾Ð´Ð°Ð½Ð¾ Ð±Ð¸Ð»ÐµÑ‚Ð¾Ð²: " << totalticket << std::endl;
 }
 
 void sumSoldTickets() {
-    std::cout << "Îáùàÿ ñóììà ïðîäàæ: " << totalSales<< " Ðóá" << std::endl;
+    std::cout << "ÐžÐ±Ñ‰Ð°Ñ ÑÑƒÐ¼Ð¼Ð° Ð¿Ñ€Ð¾Ð´Ð°Ð¶: " << totalSales<< " Ð ÑƒÐ±" << std::endl;
 }
